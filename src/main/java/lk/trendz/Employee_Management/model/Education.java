@@ -13,4 +13,6 @@ public class Education {
     private String institution;
     private String degree;
     private Integer graduationYear;
+    @ManyToOne
+    private Employee employee;
 }

@@ -1,9 +1,6 @@
 package lk.trendz.Employee_Management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -16,4 +13,6 @@ public class Leaves {
     private String leaveBalance;
     private String startDate;
     private String endDate;
+    @ManyToOne
+    private Employee employee;
 }

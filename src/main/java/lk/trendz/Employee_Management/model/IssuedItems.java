@@ -1,9 +1,6 @@
 package lk.trendz.Employee_Management.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -15,4 +12,6 @@ public class IssuedItems {
     private String itemName;
     private String issueDate;
     private String returnDate;
+    @ManyToOne
+    private Employee employee;
 }
