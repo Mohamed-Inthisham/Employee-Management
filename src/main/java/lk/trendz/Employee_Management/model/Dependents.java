@@ -10,4 +10,6 @@ public class Dependents {
     private Long dependentId;
     private String name;
     private String relationship;
+    @ManyToOne
+    private Employee employee;
 }

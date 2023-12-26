@@ -12,4 +12,6 @@ public class Salary {
     private double basicSalary;
     private double accommodationAllowance;
     private double transportationAllowance;
+    @ManyToOne
+    private Employee employee;
 }

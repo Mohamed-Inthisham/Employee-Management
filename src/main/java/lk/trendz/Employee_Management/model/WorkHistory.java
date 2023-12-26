@@ -12,4 +12,6 @@ public class WorkHistory {
     private String pwPlace;         // previous work place
     private String jobTitle;
     private String ePeriod;         // employment period
+    @ManyToOne
+    private Employee employee;
 }
