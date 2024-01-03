@@ -7,5 +7,6 @@ import java.util.List;
 
 @Service
 public interface DependentsService {
-    List<DependentsResponse> create(Long id,DependentsRequest dependentsRequest);
+    DependentsResponse create(Long employeeId,DependentsRequest dependentsRequest);
+    List<DependentsResponse> specificEmployeeDependents(Long employeeId);
 }
