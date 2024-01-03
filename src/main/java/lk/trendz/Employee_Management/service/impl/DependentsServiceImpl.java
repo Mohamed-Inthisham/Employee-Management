@@ -1,6 +1,5 @@
 package lk.trendz.Employee_Management.service.impl;
 
-import com.fasterxml.jackson.core.PrettyPrinter;
 import jakarta.persistence.EntityNotFoundException;
 import lk.trendz.Employee_Management.controller.request.DependentsRequest;
 import lk.trendz.Employee_Management.controller.response.DependentsResponse;
@@ -11,9 +10,9 @@ import lk.trendz.Employee_Management.repository.EmployeeRepository;
 import lk.trendz.Employee_Management.service.DependentsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DependentsServiceImpl implements DependentsService {
@@ -22,10 +21,9 @@ public class DependentsServiceImpl implements DependentsService {
     @Autowired
     private EmployeeRepository employeeRepository;
     @Override
-    public List<DependentsResponse> create(Long id,DependentsRequest dependentsRequest) {
-        List<DependentsResponse> dependentsResponseList=new ArrayList<>();
-        Employee employee=employeeRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException("Employee not found with id: " + id));
+    public DependentsResponse create(Long employeeId,DependentsRequest dependentsRequest) {
+        Employee employee=employeeRepository.findById(employeeId).orElseThrow(() ->
+                new EntityNotFoundException("Employee not found with id: " + employeeId));
         Dependents dependents=new Dependents();
         dependents.setName(dependentsRequest.getName());
         dependents.setRelationship(dependentsRequest.getRelationship());
@@ -37,10 +35,27 @@ public class DependentsServiceImpl implements DependentsService {
                 .relationship(dependents.getRelationship())
                 .age(dependents.getAge())
                 .build();
-        dependentsResponseList.add(dependentsResponse);
-        return dependentsResponseList;
+        return dependentsResponse;
     }
 
+    @Override
+    public List<DependentsResponse> specificEmployeeDependents(Long employeeId) {
+        Optional<Employee> optionalEmployee = employeeRepository.findById(employeeId);
+        employeeRepository.findById(employeeId).orElseThrow(() -> new EntityNotFoundException("Employee not found with id: " + employeeId));
+        List<DependentsResponse> dependentsResponses = new ArrayList<>();
+        if (optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            List<Dependents> dependentsList = employee.getDependents();
+            for (Dependents dependents : dependentsList) {
+                DependentsResponse dependentsResponse = DependentsResponse.builder()
+                        .name(dependents.getName())
+                        .age(dependents.getAge())
+                        .relationship(dependents.getRelationship())
+                        .build();
+                dependentsResponses.add(dependentsResponse);
+            }
+            return dependentsResponses;
+        }
+        return null;
+    }
 }
-
-
