@@ -10,6 +10,8 @@ public class Dependents {
     private Long dependentId;
     private String name;
     private String relationship;
+    private Integer age;
     @ManyToOne
+    @JoinColumn(name = "employeeId")
     private Employee employee;
 }
