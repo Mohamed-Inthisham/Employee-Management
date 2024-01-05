@@ -92,5 +92,31 @@ public class DependentsServiceImpl implements DependentsService {
             return outputMessageResponse;
         }
     }
-
+    @Override
+    public DependentsResponse update(Long employeeId, Long dependentId, DependentsRequest dependentsRequest) {
+        Optional<Employee> optionalEmployee=employeeRepository.findById(employeeId);
+        if(optionalEmployee.isPresent()) {
+            Employee employee = optionalEmployee.get();
+            List<Dependents> dependentsList = employee.getDependents();
+            Dependents dependentsToUpdate = dependentsList.stream()
+                    .filter(dependent -> dependent.getDependentId().equals(dependentId))
+                    .findFirst()
+                    .orElse(null);
+            if (dependentsToUpdate != null) {
+                dependentsList.add(dependentsToUpdate);
+                dependentsToUpdate.setName(dependentsRequest.getName());
+                dependentsToUpdate.setAge(dependentsRequest.getAge());
+                dependentsToUpdate.setRelationship(dependentsRequest.getRelationship());
+                employeeRepository.save(employee);
+                DependentsResponse dependentsResponse = DependentsResponse.builder()
+                        .name(dependentsToUpdate.getName())
+                        .age(dependentsToUpdate.getAge())
+                        .relationship(dependentsToUpdate.getRelationship())
+                        .build();
+                return dependentsResponse;
+            }
+        }
+        return null;
+    }
 }
+

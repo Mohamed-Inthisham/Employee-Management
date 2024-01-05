@@ -11,5 +11,5 @@ public interface DependentsService {
     DependentsResponse create(Long employeeId,DependentsRequest dependentsRequest);
     List<DependentsResponse> specificEmployeeDependents(Long employeeId);
     OutputMessageResponse delete(Long employeeId,Long dependentId);
-//    DependentsResponse update(Long employeeId,DependentsRequest dependentsRequest);
+    DependentsResponse update(Long employeeId,Long dependentId,DependentsRequest dependentsRequest);
 }
