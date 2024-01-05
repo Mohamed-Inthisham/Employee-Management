@@ -26,8 +26,10 @@ public class DependentsController {
         return dependentsService.delete(employeeId,dependentId);
 
    }
-//   @PutMapping("/dependents/{employee-id}")
-//   public DependentsResponse update(@PathVariable){
-//      return dependentsService.update()
-//   }
+   @PutMapping("/dependents/{employee-id}/{dependent-id}")
+   public DependentsResponse update(@PathVariable("employee-id")Long employeeId,
+                                    @PathVariable("dependent-id")Long dependentId,
+                                    @RequestBody DependentsRequest dependentsRequest){
+      return dependentsService.update(employeeId,dependentId,dependentsRequest);
+   }
 }
