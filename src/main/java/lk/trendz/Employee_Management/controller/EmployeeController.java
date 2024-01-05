@@ -4,14 +4,15 @@ import lk.trendz.Employee_Management.controller.request.EmployeeRequest;
 import lk.trendz.Employee_Management.controller.response.EmployeeResponse;
 import lk.trendz.Employee_Management.controller.response.OutputMessageResponse;
 import lk.trendz.Employee_Management.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class EmployeeController {
-    @Autowired
+    //@Autowired
     private EmployeeService employeeService;
     @PostMapping("/employees")
     public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest){
