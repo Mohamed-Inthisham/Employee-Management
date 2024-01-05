@@ -2,15 +2,16 @@ package lk.trendz.Employee_Management.controller;
 
 import lk.trendz.Employee_Management.controller.request.DependentsRequest;
 import lk.trendz.Employee_Management.controller.response.DependentsResponse;
+import lk.trendz.Employee_Management.controller.response.OutputMessageResponse;
 import lk.trendz.Employee_Management.service.DependentsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 public class DependentsController {
-    @Autowired
     private DependentsService dependentsService;
     @PostMapping("dependents/{employee-id}")
     public DependentsResponse create(@PathVariable("employee-id")Long id, @RequestBody DependentsRequest dependentsRequest){
@@ -20,4 +21,13 @@ public class DependentsController {
    public List<DependentsResponse> specificEmployeeDependents(@PathVariable("employee-id")Long id){
         return dependentsService.specificEmployeeDependents(id);
    }
+   @DeleteMapping("/dependents/{employee-id}/{dependent-id}")
+   public OutputMessageResponse delete(@PathVariable("employee-id")Long employeeId,@PathVariable("dependent-id")Long dependentId){
+        return dependentsService.delete(employeeId,dependentId);
+
+   }
+//   @PutMapping("/dependents/{employee-id}")
+//   public DependentsResponse update(@PathVariable){
+//      return dependentsService.update()
+//   }
 }

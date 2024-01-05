@@ -6,7 +6,7 @@ import lk.trendz.Employee_Management.controller.response.OutputMessageResponse;
 import lk.trendz.Employee_Management.model.Employee;
 import lk.trendz.Employee_Management.repository.EmployeeRepository;
 import lk.trendz.Employee_Management.service.EmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
-    @Autowired
     private EmployeeRepository employeeRepository;
     @Override
     public EmployeeResponse create(EmployeeRequest employeeRequest) {
