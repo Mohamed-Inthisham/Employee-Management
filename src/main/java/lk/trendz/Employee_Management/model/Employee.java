@@ -14,6 +14,7 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String dob;
+    private Integer age;
     private String gender;
     private String nationality;
     private String address;
@@ -36,6 +37,7 @@ public class Employee {
     private List<Salary> salaries;
     @OneToMany(mappedBy = "employee")
     private List<WorkHistory> workHistories;
-    @OneToOne(mappedBy = "employee")
+    @ManyToOne
+    @JoinColumn(name = "designationId")
     private Designation designation;
 }
