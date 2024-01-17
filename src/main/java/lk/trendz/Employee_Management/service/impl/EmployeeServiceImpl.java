@@ -23,6 +23,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setFirstName(employeeRequest.getFirstName());
         employee.setLastName(employeeRequest.getLastName());
         employee.setDob(employeeRequest.getDob());
+        employee.setAge(employeeRequest.getAge());
         employee.setGender(employeeRequest.getGender());
         employee.setNationality(employeeRequest.getNationality());
         employee.setAddress(employeeRequest.getAddress());
@@ -35,6 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeResponse.setFirstName(employee.getFirstName());
         employeeResponse.setLastName(employee.getLastName());
         employeeResponse.setDob(employee.getDob());
+        employeeResponse.setAge(employee.getAge());
         employeeResponse.setGender(employee.getGender());
         employeeResponse.setNationality(employee.getNationality());
         employeeResponse.setAddress(employee.getAddress());
@@ -52,6 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeResponse.setFirstName(employee.getFirstName());
             employeeResponse.setLastName(employee.getLastName());
             employeeResponse.setDob(employee.getDob());
+            employeeResponse.setAge(employee.getAge());
             employeeResponse.setGender(employee.getGender());
             employeeResponse.setNationality(employee.getNationality());
             employeeResponse.setAddress(employee.getAddress());
@@ -72,6 +75,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeResponse.setFirstName(employee.getFirstName());
             employeeResponse.setLastName(employee.getLastName());
             employeeResponse.setDob(employee.getDob());
+            employeeResponse.setAge(employee.getAge());
             employeeResponse.setGender(employee.getGender());
             employeeResponse.setNationality(employee.getNationality());
             employeeResponse.setAddress(employee.getAddress());
@@ -98,6 +102,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setFirstName(employeeRequest.getFirstName());
             employee.setLastName(employeeRequest.getLastName());
             employee.setDob(employeeRequest.getDob());
+            employee.setAge(employeeRequest.getAge());
             employee.setGender(employeeRequest.getGender());
             employee.setNationality(employeeRequest.getNationality());
             employee.setAddress(employeeRequest.getAddress());
@@ -111,6 +116,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employeeResponse.setFirstName(updateEmployee.getFirstName());
             employeeResponse.setLastName(updateEmployee.getLastName());
             employeeResponse.setDob(updateEmployee.getDob());
+            employeeResponse.setAge(updateEmployee.getAge());
             employeeResponse.setGender(updateEmployee.getGender());
             employeeResponse.setNationality(updateEmployee.getNationality());
             employeeResponse.setAddress(updateEmployee.getAddress());
