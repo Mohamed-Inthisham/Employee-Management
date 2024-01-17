@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public interface EmployeeService {
-    EmployeeResponse create(EmployeeRequest employeeRequest);
+    EmployeeResponse create(Long designationId,EmployeeRequest employeeRequest);
     List<EmployeeResponse> getAll(EmployeeRequest employeeRequest);
     EmployeeResponse specificEmployeeDetails(Long id);
     OutputMessageResponse delete(Long id);
