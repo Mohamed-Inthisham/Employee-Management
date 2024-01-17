@@ -1,9 +1,12 @@
 package lk.trendz.Employee_Management.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lk.trendz.Employee_Management.controller.request.EmployeeRequest;
 import lk.trendz.Employee_Management.controller.response.EmployeeResponse;
 import lk.trendz.Employee_Management.controller.response.OutputMessageResponse;
+import lk.trendz.Employee_Management.model.Designation;
 import lk.trendz.Employee_Management.model.Employee;
+import lk.trendz.Employee_Management.repository.DesignationRepository;
 import lk.trendz.Employee_Management.repository.EmployeeRepository;
 import lk.trendz.Employee_Management.service.EmployeeService;
 import lombok.AllArgsConstructor;
@@ -17,33 +20,43 @@ import java.util.Optional;
 @AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
+    private DesignationRepository designationRepository;
     @Override
-    public EmployeeResponse create(EmployeeRequest employeeRequest) {
-        Employee employee=new Employee();
-        employee.setFirstName(employeeRequest.getFirstName());
-        employee.setLastName(employeeRequest.getLastName());
-        employee.setDob(employeeRequest.getDob());
-        employee.setAge(employeeRequest.getAge());
-        employee.setGender(employeeRequest.getGender());
-        employee.setNationality(employeeRequest.getNationality());
-        employee.setAddress(employeeRequest.getAddress());
-        employee.setMaritalStatus(employeeRequest.getMaritalStatus());
-        employee.setEmail(employeeRequest.getEmail());
-        employee.setContactNumber(employeeRequest.getContactNumber());
-        employeeRepository.save(employee);
+    public EmployeeResponse create(Long designationId,EmployeeRequest employeeRequest) {
+        Optional<Designation> optionalDesignation=designationRepository.findById(designationId);
+        designationRepository.findById(designationId).orElseThrow(()->
+                new EntityNotFoundException("designation not found"));
 
-        EmployeeResponse employeeResponse=new EmployeeResponse();
-        employeeResponse.setFirstName(employee.getFirstName());
-        employeeResponse.setLastName(employee.getLastName());
-        employeeResponse.setDob(employee.getDob());
-        employeeResponse.setAge(employee.getAge());
-        employeeResponse.setGender(employee.getGender());
-        employeeResponse.setNationality(employee.getNationality());
-        employeeResponse.setAddress(employee.getAddress());
-        employeeResponse.setMaritalStatus(employee.getMaritalStatus());
-        employeeResponse.setEmail(employee.getEmail());
-        employeeResponse.setContactNumber(employee.getContactNumber());
-        return employeeResponse;
+        if (optionalDesignation.isPresent()) {
+            Designation designation = optionalDesignation.get();
+            Employee employee=new Employee();
+            employee.setFirstName(employeeRequest.getFirstName());
+            employee.setLastName(employeeRequest.getLastName());
+            employee.setDob(employeeRequest.getDob());
+            employee.setAge(employeeRequest.getAge());
+            employee.setGender(employeeRequest.getGender());
+            employee.setNationality(employeeRequest.getNationality());
+            employee.setAddress(employeeRequest.getAddress());
+            employee.setMaritalStatus(employeeRequest.getMaritalStatus());
+            employee.setEmail(employeeRequest.getEmail());
+            employee.setContactNumber(employeeRequest.getContactNumber());
+            employee.setDesignation(designation);
+            employeeRepository.save(employee);
+
+            EmployeeResponse employeeResponse=new EmployeeResponse();
+            employeeResponse.setFirstName(employee.getFirstName());
+            employeeResponse.setLastName(employee.getLastName());
+            employeeResponse.setDob(employee.getDob());
+            employeeResponse.setAge(employee.getAge());
+            employeeResponse.setGender(employee.getGender());
+            employeeResponse.setNationality(employee.getNationality());
+            employeeResponse.setAddress(employee.getAddress());
+            employeeResponse.setMaritalStatus(employee.getMaritalStatus());
+            employeeResponse.setEmail(employee.getEmail());
+            employeeResponse.setContactNumber(employee.getContactNumber());
+            return employeeResponse;
+        }
+        return null;
     }
     @Override
     public List<EmployeeResponse> getAll(EmployeeRequest employeeRequest) {

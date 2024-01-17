@@ -13,9 +13,9 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
     private EmployeeService employeeService;
-    @PostMapping(value = "/employees",headers ="X-API-VERSION=1")
-    public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest){
-        return employeeService.create(employeeRequest);
+    @PostMapping(value = "/employees/designations/{designation-id}",headers ="X-API-VERSION=1")
+    public EmployeeResponse addEmployee(@PathVariable("designation-id")Long designationId,@RequestBody EmployeeRequest employeeRequest){
+        return employeeService.create(designationId,employeeRequest);
     }
     @GetMapping(value = "/employees",headers ="X-API-VERSION=1")
     public List<EmployeeResponse> getAllEmployees(EmployeeRequest employeeRequest){
