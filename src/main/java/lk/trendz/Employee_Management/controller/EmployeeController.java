@@ -13,23 +13,23 @@ import java.util.List;
 @AllArgsConstructor
 public class EmployeeController {
     private EmployeeService employeeService;
-    @PostMapping("/employees")
+    @PostMapping(value = "/employees",headers ="X-API-VERSION=1")
     public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest){
         return employeeService.create(employeeRequest);
     }
-    @GetMapping("/employees")
+    @GetMapping(value = "/employees",headers ="X-API-VERSION=1")
     public List<EmployeeResponse> getAllEmployees(EmployeeRequest employeeRequest){
         return employeeService.getAll(employeeRequest);
     }
-    @GetMapping("/employees/{employee-id}")
+    @GetMapping(value = "/employees/{employee-id}",headers ="X-API-VERSION=1")
     public EmployeeResponse specificEmployeeDetails(@PathVariable("employee-id")Long id){
         return employeeService.specificEmployeeDetails(id);
     }
-    @DeleteMapping("/employees/{employee-id}")
+    @DeleteMapping(value = "/employees/{employee-id}",headers ="X-API-VERSION=1")
     public OutputMessageResponse deleteEmployee(@PathVariable("employee-id")Long id){
         return employeeService.delete(id);
     }
-    @PutMapping("/employees/{employee-id}")
+    @PutMapping(value = "/employees/{employee-id}",headers ="X-API-VERSION=1")
     public EmployeeResponse updateEmployee(@PathVariable("employee-id")Long id,@RequestBody EmployeeRequest employeeRequest){
         return employeeService.update(id, employeeRequest);
     }
