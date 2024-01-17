@@ -8,6 +8,7 @@ public class EmployeeRequest {
     private String firstName;
     private String lastName;
     private String dob;
+    private Integer age;
     private String gender;
     private String nationality;
     private String address;
